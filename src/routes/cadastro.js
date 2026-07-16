@@ -9,8 +9,23 @@ router.post('/', (req, res) => {
         const { cpf, nome, senha } = req.body;
 
         // verificando se os campos estão vazios
-        if(!cpf === "" || !nome === "" || !senha === "") {
+        if(!cpf || !nome || !senha ) {
             return res.status(400).json({ erro: "Preenche todos os campos"});
+        }
+
+        // verifica o tamanho dos digitos 
+        if(cpf.length !== 11) {
+            return res.status(400).json( { erro: "Seu cpf deve ter 11 digitos "})
+        }
+
+        // verifica o tamanho do nome
+        if((nome.length < 6) || (nome.length > 25)) {
+            return res.status(400).json( { erro: "Seu nome deve ter entre 6 a 25 caracteres "})
+        }
+
+        // verifica o tamanho da senha
+        if((senha.length < 8) || (senha.length > 16)) {
+            return res.status(400).json( { erro: "Sua senha deve ter entre 8 a 16 caracteres "});
         }
 
         console.log("Cadastro recebido com sucesso!");
