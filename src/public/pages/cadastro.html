@@ -10,12 +10,12 @@
     <section class = "container">
         <form action = "/cadastro" method="post">
             <label>Digite seu CPF: </label>
-            <input type="number" name = "cpf" id="campo_cpf" placeholder="Seu cpf...." minlenght = "12"maxlength="12" required>
+            <input type="text" inputmode="numeric" name="cpf" id="campo_cpf" placeholder="Seu cpf...." minlength="11" maxlength="11" required>
 
-            <label>Nome de usuário:</label>
+            <label>Digite o nome de usuário:</label>
             <input type="text" name = "nome" id="campo_nome" placeholder="Seu nome...." minlenght = "6" maxlength="25" required>
 
-            <label>Senha do usuário:</label>
+            <label>Digite a senha do usuário:</label>
             <input type="password" name = "senha"id="campo_senha" placeholder = "Sua senha...." minlength="8" maxlength="16" required>
 
             <button type="submit">Cadastrar</button>
