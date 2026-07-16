@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/src/public/styles/main.css">
+    <link rel="stylesheet" href="/styles/main.css">
     <title>Cadastro</title>
 </head>
 <body>
     <section class = "container">
-        <form method="post">
+        <form action = "/cadastro" method="post">
             <label>Digite seu CPF: </label>
-            <input type="text" id="campo_cpf" placeholder="Seu cpf...." required>
+            <input type="text" name = "cpf" id="campo_cpf" placeholder="Seu cpf...." required>
 
             <label>Nome de usuário:</label>
-            <input type="text" id="campo_nome" placeholder="Seu nome...." required>
+            <input type="text" name = "nome" id="campo_nome" placeholder="Seu nome...." required>
 
             <label>Senha do usuário:</label>
-            <input type="password" id="campo_senha" placeholder = "Sua senha...." required>
+            <input type="password" name = "senha"id="campo_senha" placeholder = "Sua senha...." required>
 
             <button type="submit">Cadastrar</button>
-            <a href="/src/public/pages/login.html">Já possui cadastro?</a>
+            <a href="/pages/login.html">Já possui cadastro?</a>
         </form>
     </section>
 </body>
