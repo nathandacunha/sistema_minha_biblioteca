@@ -25,6 +25,7 @@ login.post('/', (req, res) => {
             return res.status(400).json( { erro: `CPF ou senha do usuário inválido`});
         }
 
+        req.session.usuario = { id: usuario.id, nome: usuario.nome };
         console.log("Login bem-sucessido: ", usuario.nome);
         res.redirect('/pages/index.html');
     } catch(error) {

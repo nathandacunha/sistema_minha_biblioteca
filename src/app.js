@@ -3,6 +3,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import cadastroRoutes from './routes/cadastro.js';
 import loginRoutes from '../src/routes/login.js';
+import logoutRoutes from '../src/routes/logout.js';
+import session from 'express-session';
 
 // simula o __dirname em ESmodules
 const __filename = fileURLToPath(import.meta.url);
@@ -22,7 +24,17 @@ app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}/pages/cadastro.html`);
 });
 
+// adiciona a session 
+app.use(session({
+    secret: "Uma frase quaisquer",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 1000*60*60 }
+}));
+
+
 // usando a rota cadastro e de login
 app.use(express.urlencoded({ extended: true}));
 app.use('/cadastro', cadastroRoutes);
 app.use('/login', loginRoutes);
+app.use('/logout', logoutRoutes);
