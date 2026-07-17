@@ -1,5 +1,7 @@
 import express from 'express';
 import { error } from 'node:console';
+import conexao from '../models/db.js';
+
 const router = express.Router();
 
 // cria uma rota post 
@@ -27,6 +29,10 @@ router.post('/', (req, res) => {
         if((senha.length < 8) || (senha.length > 16)) {
             return res.status(400).json( { erro: "Sua senha deve ter entre 8 a 16 caracteres "});
         }
+
+        // inserindo as informações do usuário no banco de dados
+        const stmt = conexao.prepare("INSERT INTO usuarios (cpf, nome, senha) VALUES (?,?,?)");
+        stmt.run(cpf, nome, senha);
 
         console.log("Cadastro recebido com sucesso!");
         res.redirect("/pages/login.html");
