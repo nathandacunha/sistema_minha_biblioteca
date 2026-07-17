@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/src/public/styles/main.css">
-    <title>Cadastro</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <title>Login</title>
 </head>
 <body>
-    <section class = "container">
-        <form method="get">
-            <label>Nome de usuário:</label>
-            <input type="text" id="campo_nome" placeholder="Seu nome...." required>
+    <section class="container">
+        <form action="/login" method="post">
+            <label>CPF do usuário:</label>
+            <input type="text" name="cpf" id="campo_cpf" placeholder="Seu CPF...." required>
 
             <label>Senha do usuário:</label>
-            <input type="password" id="campo_senha" placeholder = "Sua senha...." required>
+            <input type="password" name="senha" id="campo_senha" placeholder="Sua senha...." required>
 
-            <button type="submit">Cadastrar</button>
-            <a href="/src/public/pages/login.html">Já possui cadastro?</a>
+            <button type="submit">Entrar</button>
+            <a href="/pages/cadastro.html">Ainda não tem conta? Cadastre-se</a>
         </form>
     </section>
 </body>

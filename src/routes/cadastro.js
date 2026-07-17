@@ -2,13 +2,16 @@ import express from 'express';
 import { error } from 'node:console';
 import conexao from '../models/db.js';
 
-const router = express.Router();
+const cadastro = express.Router();
 
 // cria uma rota post 
-router.post('/', (req, res) => {
+cadastro.post('/', (req, res) => {
     try {
         console.log(req.body);
         const { cpf, nome, senha } = req.body;
+
+        // salvando o cpf sem a formatação
+        // const cpfLimpo = cpf.replace(/\D\g, '');
 
         // verificando se os campos estão vazios
         if(!cpf || !nome || !senha ) {
@@ -16,8 +19,8 @@ router.post('/', (req, res) => {
         }
 
         // verifica o tamanho dos digitos 
-        if(cpf.length !== 11) {
-            return res.status(400).json( { erro: "Seu cpf deve ter 11 digitos "})
+        if(cpf.length !== 14) {
+            return res.status(400).json( { erro: "Seu cpf deve ter 14 digitos "})
         }
 
         // verifica o tamanho do nome
@@ -41,4 +44,4 @@ router.post('/', (req, res) => {
     }
 });
 
-export default router;
+export default cadastro;
