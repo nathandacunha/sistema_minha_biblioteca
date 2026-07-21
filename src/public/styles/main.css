@@ -4,4 +4,21 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: rgba(238, 238, 238, 0.9333333333);
+}
+
+.container form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  height: 50vh;
+}
+
+button {
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=main.css.map */
