@@ -5,6 +5,7 @@ import cadastroRoutes from './routes/cadastro.js';
 import loginRoutes from '../src/routes/login.js';
 import logoutRoutes from '../src/routes/logout.js';
 import session from 'express-session';
+import Database from './models/db.js';
 
 // simula o __dirname em ESmodules
 const __filename = fileURLToPath(import.meta.url);
