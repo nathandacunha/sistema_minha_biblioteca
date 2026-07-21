@@ -4,9 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/main.css">
-    <title>Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">    <title>Login</title>
 </head>
 <body>
+    <section>
+        <header>
+            <nav class="navbar">
+               <div class="navbar__logo">MinhaBiblioteca</div>
+
+                <button class="navbar__toggle" id="btnMenu" aria-label="Abrir menu">
+                    <i class="bi bi-list"></i>
+                </button>
+
+                <ul class="navbar__links" id="menuLinks">
+                    <li>
+                        <a href="/pages/index.html"><i class="bi bi-house"></i> Início</a>
+                    </li>
+                    <li>
+                        <a href="/pages/cadastro.html"><i class="bi bi-person-plus"></i> Cadastro</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="bi bi-people"></i>Quem somos nós?</a>
+                    </li>
+                    <!-- <li>
+                        <form action="/logout" method="post">
+                            <button type="submit"><i class="bi bi-box-arrow-right"></i> Sair</button>
+                        </form>
+                    </li> -->
+                </ul>
+            </nav>
+        </header>
+    </section>
+
     <section class="container">
         <form action="/login" method="post">
             <label>CPF do usuário:</label>
@@ -19,5 +48,7 @@
             <a href="/src/public/pages/cadastro.html">Ainda não tem conta? Cadastre-se</a>
         </form>
     </section>
+
+    <script src="../scripts/navbar.js"></script>
 </body>
 </html>
