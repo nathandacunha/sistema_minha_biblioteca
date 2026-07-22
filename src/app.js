@@ -6,6 +6,7 @@ import loginRoutes from '../src/routes/login.js';
 import logoutRoutes from '../src/routes/logout.js';
 import session from 'express-session';
 import Database from './models/db.js';
+import adicionarLivrosRoutes from './controllers/livros.js';
 
 // simula o __dirname em ESmodules
 const __filename = fileURLToPath(import.meta.url);
@@ -39,3 +40,4 @@ app.use(express.urlencoded({ extended: true}));
 app.use('/cadastro', cadastroRoutes);
 app.use('/login', loginRoutes);
 app.use('/logout', logoutRoutes);
+app.use('/livros', adicionarLivrosRoutes);
