@@ -1,7 +1,13 @@
 <template>
   <v-app>
-    <v-container>
-      <v-btn color="primary">Funcionou!</v-btn>
-    </v-container>
+    <NavBar />
+
+    <v-main>
+      <router-view />
+    </v-main>
   </v-app>
 </template>
+
+<script setup>
+  import NavBar from './components/NavBar.vue';
+</script>
