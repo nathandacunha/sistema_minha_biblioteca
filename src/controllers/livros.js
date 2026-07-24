@@ -28,4 +28,19 @@ adicionarLivros.post('/', (req, res) => {
     }
 });
 
+adicionarLivros.get('/', (req, res) => {
+    try {
+        if (!req.session.usuario) {
+            return res.status(401).json({ erro: "Você precisa estar logado" });
+        }
+
+        const stmt = conexao.prepare('SELECT * FROM livros WHERE idUsuario = ?');
+        const livros = stmt.all(req.session.usuario.id);
+
+        res.json(livros);
+    } catch(error) {
+        console.log(error);
+        res.status(500).json({ erro: "Erro interno no servidor. Tente mais tarde" });
+    }
+});
 export default adicionarLivros;
