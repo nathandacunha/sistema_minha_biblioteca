@@ -6,7 +6,7 @@ import bcrypt from 'bcrypt';
 const cadastro = express.Router();
 
 // cria uma rota post 
-cadastro.post('/', (req, res) => {
+cadastro.post('/', async (req, res) => {
     try {
         console.log(req.body);
         const { cpf, nome, senha } = req.body;
@@ -18,20 +18,22 @@ cadastro.post('/', (req, res) => {
         }
 
         // salvando o cpf sem a formatação
-        // const cpfLimpo = cpf.replace(/\D\g, '');
+        const cpfLimpo = cpf.replace(/\D/g, '');
 
         // verifica o tamanho dos digitos 
         if(cpf.length !== 14) {
             return res.status(400).json( { erro: "Seu cpf deve ter 14 digitos "})
         }
 
+
         // verifica o tamanho do nome
         if((nome.length < 6) || (nome.length > 25)) {
             return res.status(400).json( { erro: "Seu nome deve ter entre 6 a 25 caracteres "})
         }
 
+        console.log("Senha recebida: ", senha, " - Tamanho: ", senha.length);
         // verifica o tamanho da senha
-        if((senha.length < 8) || (senha.length > 6)) {
+        if((senha.length < 8) || (senha.length > 16)) {
             return res.status(400).json( { erro: "Sua senha deve ter entre 8 a 16 caracteres "});
         }
 

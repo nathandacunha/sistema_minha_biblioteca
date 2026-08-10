@@ -6,7 +6,7 @@ import bcrypt from 'bcrypt';
 const login = express.Router();
 
 // criar uma rota get
-login.post('/', (req, res) => {
+login.post('/', async (req, res) => {
     try {
         const {cpf, senha} = req.body;
 
@@ -23,6 +23,8 @@ login.post('/', (req, res) => {
         }
 
         // comparando a senha digita com o hash salvo
+        const senhaCorreta = await bcrypt.compare(senha, usuario.senha);
+
         if(!senhaCorreta) {
             return res.status(400).json({ erro: "CPF ou senha do usuário inválido" });
         }
