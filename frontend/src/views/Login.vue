@@ -1,5 +1,0 @@
-<template>
-    <v-container>
-        <h1>Página do Login</h1>
-    </v-container>
-</template>
