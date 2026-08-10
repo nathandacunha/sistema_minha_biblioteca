@@ -1,6 +1,7 @@
 import express from 'express';
 import { error } from 'node:console';
 import conexao from '../models/db.js';
+import bcrypt from 'bcrypt';
 
 const login = express.Router();
 
@@ -21,8 +22,9 @@ login.post('/', (req, res) => {
             return res.status(400).json( { erro: `CPF ou senha do usuário inválido`});
         }
 
-        if(usuario.senha !== senha) {
-            return res.status(400).json( { erro: `CPF ou senha do usuário inválido`});
+        // comparando a senha digita com o hash salvo
+        if(!senhaCorreta) {
+            return res.status(400).json({ erro: "CPF ou senha do usuário inválido" });
         }
 
         req.session.usuario = { id: usuario.id, nome: usuario.nome };
