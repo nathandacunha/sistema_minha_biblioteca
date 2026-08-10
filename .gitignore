@@ -1,5 +1,3 @@
 node_modules/
 *.css.map
 minhaBiblioteca.db
-*db.js
-models/
