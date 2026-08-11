@@ -15,8 +15,13 @@ login.post('/', async (req, res) => {
             return res.status(400).json({ erro: "Preenche todos os campos"});
         }
 
+        const cpfLimpo = cpf.replace(/\D/g, '');
+        console.log("CPF limpo buscado: ", cpfLimpo);
+
         const stmt = conexao.prepare("SELECT * FROM usuarios WHERE cpf = ?");
-        const usuario = stmt.get(cpf);
+        const usuario = stmt.get(cpfLimpo);
+
+        console.log("Usuario encontrado: ", usuario);
 
         if(!usuario) {
             return res.status(400).json( { erro: `CPF ou senha do usuário inválido`});

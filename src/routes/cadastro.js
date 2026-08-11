@@ -21,7 +21,7 @@ cadastro.post('/', async (req, res) => {
         const cpfLimpo = cpf.replace(/\D/g, '');
 
         // verifica o tamanho dos digitos 
-        if(cpf.length !== 14) {
+        if(cpf.length !== 11) {
             return res.status(400).json( { erro: "Seu cpf deve ter 14 digitos "})
         }
 
@@ -31,7 +31,6 @@ cadastro.post('/', async (req, res) => {
             return res.status(400).json( { erro: "Seu nome deve ter entre 6 a 25 caracteres "})
         }
 
-        console.log("Senha recebida: ", senha, " - Tamanho: ", senha.length);
         // verifica o tamanho da senha
         if((senha.length < 8) || (senha.length > 16)) {
             return res.status(400).json( { erro: "Sua senha deve ter entre 8 a 16 caracteres "});
@@ -42,7 +41,7 @@ cadastro.post('/', async (req, res) => {
 
         // inserindo as informações do usuário no banco de dados
         const stmt = conexao.prepare("INSERT INTO usuarios (cpf, nome, senha) VALUES (?,?,?)");
-        stmt.run(cpf, nome, senha);
+        stmt.run(cpfLimpo, nome, senhaHash);
 
         console.log("Cadastro recebido com sucesso!");
         res.redirect("/pages/login.html");
