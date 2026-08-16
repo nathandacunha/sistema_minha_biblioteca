@@ -1,25 +1,35 @@
 import express from 'express';
+import { body, validationResult } from 'express-validator';
 import { error } from 'node:console';
 import conexao from '../models/db.js';
 import bcrypt from 'bcrypt';
 
 const login = express.Router();
 
-// criar uma rota get
-login.post('/', async (req, res) => {
-    try {
-        const {cpf, senha} = req.body;
+// criando regras de validação para o login
+const regrasLogin = [
+    body('cpf')
+        .trim()
+        .customSanitizer(valor => valor.replace(/\D/g, ''))
+        .notEmpty().withMessage('CPF é obrigatório'),
+    
+    body('senha')
+        .notEmpty().withMessage('A senha é obrigatoria'),
+];
 
-        // verificando se os campos estão vazios
-        if(!cpf || !senha ) {
-            return res.status(400).json({ erro: "Preenche todos os campos"});
+// criar uma rota post
+login.post('/', regrasLogin, async (req, res) => {
+    try {
+        const erros = validationResult(req);
+
+        if(!erros.isEmpty()) {
+            return res.status(400).json({ erros: erros.array() });
         }
 
-        const cpfLimpo = cpf.replace(/\D/g, '');
-        console.log("CPF limpo buscado: ", cpfLimpo);
+        const { cpf, senha } = req.body;
 
         const stmt = conexao.prepare("SELECT * FROM usuarios WHERE cpf = ?");
-        const usuario = stmt.get(cpfLimpo);
+        const usuario = stmt.get(cpf);
 
         console.log("Usuario encontrado: ", usuario);
 
