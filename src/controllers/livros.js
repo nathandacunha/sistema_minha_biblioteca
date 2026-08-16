@@ -27,4 +27,21 @@ adicionarLivros.post('/', exigirLogin, (req, res, next) => {
   }
 });
 
+// lista todos os livros especifico atraves do id
+
+adicionarLivros.get('/:id', (req, res, next) => {
+    try {
+        const stmt = conexao.prepare("SELECT * FROM livros WHERE idLivro = ? AND idUsuario = ?");
+        const livro = stmt.get(req.params.id, req.session.usuario.id);
+
+        if(!livro) {
+            return res.status(400).json({erro: "Livro não encontrado"});
+        }
+
+        res.json(livros);
+    } catch(error) {
+        next(error);
+    }
+});
+
 export default adicionarLivros;
