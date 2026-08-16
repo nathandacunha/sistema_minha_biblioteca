@@ -76,4 +76,21 @@ adicionarLivros.put('/:id', (req, res, next) => {
     }
 });
 
+// delete um livro
+
+adicionarLivros.delete('/:id', (req, res, next) => {
+    try {
+        const stmt = conexao.prepare("DELETE FROM livros WHERE idLivro = ? AND idUsuario = ?");
+        const resultado = stmt.run(req.params.id, req.session.usuario.id);
+
+        if(resultado.changes === 0) {
+            return res.status(404).json({ erro: "Livro não encontrado" });
+        }
+
+        res.status(204).send();
+     } catch(error) {
+        next(error);
+    }
+});
+
 export default adicionarLivros;
