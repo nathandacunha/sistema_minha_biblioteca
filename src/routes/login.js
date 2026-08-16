@@ -18,7 +18,7 @@ const regrasLogin = [
 ];
 
 // criar uma rota post
-login.post('/', regrasLogin, async (req, res) => {
+login.post('/', regrasLogin, async (req, res, next) => {
     try {
         const erros = validationResult(req);
 
@@ -48,7 +48,7 @@ login.post('/', regrasLogin, async (req, res) => {
         console.log("Login bem-sucessido: ", usuario.nome);
         res.redirect('/pages/index.html');
     } catch(error) {
-        return res.status(400).json( { erro: "Erro interno no servidor. Tente mais tarde"});
+        next(error);
     }
 });
 
