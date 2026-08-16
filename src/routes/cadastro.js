@@ -22,7 +22,7 @@ const regrasValidacoes = [
 ];
 
 // cria uma rota post 
-cadastro.post('/', regrasValidacoes, async (req, res) => {
+cadastro.post('/', regrasValidacoes, async (req, res, next) => {
     try {
         // verificacao se alguma regra falhou
         const erros = validationResult(req);
@@ -43,7 +43,7 @@ cadastro.post('/', regrasValidacoes, async (req, res) => {
         console.log("Cadastro recebido com sucesso!");
         res.redirect("/pages/login.html");
     } catch(error) {
-        return res.status(500).json({ erro: "Erro interno no servidor. Tente mais tarde" });
+        next(error);
     }
 });
 
